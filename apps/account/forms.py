@@ -47,7 +47,7 @@ class UserRegisterForm(forms.Form):
     full_name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}))
     phone_number = forms.CharField(
-        widget=forms.NumberInput(attrs={'class': 'form-control'}))
+        widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(widget=forms.EmailInput(
         attrs={'class': 'form-control'}))
     password = forms.CharField(

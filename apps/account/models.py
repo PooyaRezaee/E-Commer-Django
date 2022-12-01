@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
+from .utils import send_custom_email
 
 __all__ = ['User','OtpCode']
 
@@ -78,9 +79,13 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+    def send_email(self,sunject,message):
+        send_custom_email(self.email,sunject,message)
+
     
 class OtpCode(models.Model):
-    phone = models.PositiveSmallIntegerField(unique=True)
+    phone = models.CharField(max_length=11,unique=True)
     code = models.PositiveSmallIntegerField()
 
 

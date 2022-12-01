@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib import messages
 from .forms import *
 from .models import *
-from .utils import send_otp_code
+from .utils import send_otp_code,send_custom_email
 import random
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -37,16 +37,12 @@ class RegistretionUser(View):
         if form.is_valid():
             data = form.cleaned_data
             full_name = data['full_name']
-            phone_number = data['phone_number']
+            phone_number = data['phone_number'] 
             email = data['email']
             password = data['password']
-            print('='*10)
             code = random.randint(1000, 9999)
-            print('='*10)
             OtpCode.objects.create(phone=phone_number, code=code)
-            print('='*10)
-            send_otp_code(phone_number, code)
-            print('='*10)
+            send_otp_code(email,full_name, code)
 
             request.session['user_registration_info'] = {
                 'full_name': full_name,
@@ -54,7 +50,6 @@ class RegistretionUser(View):
                 'email': email,
                 'password': password,
             }
-            print('='*10)
 
             messages.success(request,'Code Sended', extra_tags='info')
             return redirect('account:verify_code')
@@ -91,8 +86,9 @@ class VerifyCode(View):
             otp_obj = OtpCode.objects.filter(phone=phone_number).first()
 
             if otp_obj.check_code(code_entered):
-                User.objects.create_user(phone_number=phone_number,email=email,full_name=full_name,password=password)
+                user = User.objects.create_user(phone_number=phone_number,email=email,full_name=full_name,password=password)
                 otp_obj.delete()
+                user.send_email('Congratolation','You Account Created\nWe Enjoy You Like MY WebSite')
                 messages.success(request,'Your Account Created','success')
                 return redirect('account:login')
             else:
@@ -129,8 +125,6 @@ class LoginUserView(View):
             password = data['password']
 
             user = authenticate(request, phone_number=phone_number, password=password)
-            print(phone_number)
-            print(password)
             if user is not None:
                 login(request,user)
                 messages.success(request,'You Logged','success')

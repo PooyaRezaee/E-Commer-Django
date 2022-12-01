@@ -1,8 +1,11 @@
-SECRET_KEY = 
-DEBUG = 
+SECRET_KEY = random value
+DEBUG = True or False
 
-POSTGRESS_NAME = 
-POSTGRESS_USER = 
-POSTGRESS_PASSWORD = 
-POSTGRESS_HOST = 
-POSTGRESS_PORT = 
+POSTGRESS_NAME = DataBase Name
+POSTGRESS_USER = User Postgresql
+POSTGRESS_PASSWORD = Password Postgresql
+POSTGRESS_HOST = host db
+POSTGRESS_PORT = port db
+
+EMAIL_HOST_USER = gmail addres
+EMAIL_HOST_PASSWORD = gmail password app

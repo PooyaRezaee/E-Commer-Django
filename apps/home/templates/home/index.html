@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %}Home{% endblock title %}
 
 {% block body %}
-    <h3> This is Home Page </h3>
+    <div class="d-flex flex-wrap justify-content-around">
+        {% for product in products %}
+        <div class="col-2 m-3 p-3 border border-secondary rounded">
+            <a href="{% url 'home:detail' product.slug%}">
+                <img class="img-thumbnail col-12 p-2" src="{{ product.image.url }}" alt="">
+                <h2 class="text-center" style="font-size: 1vw;">{{product.name | truncatewords:10}}</h2>
+                <div class="d-flex justify-content-between p-2">
+                    <span class="lead" style="font-size: 1vw;"><i class="fa-solid fa-dollar-sign text-success"></i> {{ product.price | intcomma }}</span>
+                    <span class="lead badge bg-primary" style="font-size: 0.8vw;">{{ product.category }}</span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock body %}
-    

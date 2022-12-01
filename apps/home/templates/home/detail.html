@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head-custom %}
+    <link rel="stylesheet" href="{% static 'styles/detail.css' %}">
+{% endblock head-custom %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+    <div class="col-12 d-flex p-2">
+        <div class="col-4 text-start">
+            <img class="img-thumbnail col-12 p-2 w-75" src="{{ product.image.url }}" alt="">
+            <h2 class="text-start  w-75" style="font-size: 1.5vw;">{{product.name}}</h2>
+            <p class="lead badge bg-primary" style="font-size: 0.8vw;">{{ product.category }}</p>
+        </div>
+
+        
+        <div class="col-4">
+            <p class=" font-weight-normal" style="text-align: justify;font-size: 1vw;">{{product.description | safe}}</p>
+        </div>
+        
+        
+        <div class="col-4">
+            <div id="box-buy" class="bg-white">
+                <span><i class="fa-solid fa-shield text-warning"></i> 3 Day Waranty</span>
+                <hr>
+                <span>
+                    {% for num in product.amount|make_list  %}<i class="text-primary fa-solid fa-{{ num }}"></i>{% endfor %} Available in stock
+                </span>
+                <hr>
+                <span><i class="fa-solid fa-dollar-sign text-success"></i> {{ product.price | intcomma }}</span>
+                <hr>
+                <div class="btn-group">
+                    <button class="btn btn-danger"><i class="fa-solid fa-minus"></i></button>
+                    <button class="btn btn-secondary" style="cursor: default;">0</button>
+                    <button class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

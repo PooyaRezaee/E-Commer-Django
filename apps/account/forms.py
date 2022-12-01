@@ -71,5 +71,5 @@ class VerifyCodeForm(forms.Form):
     code = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control'}))
 
 class LoginForm(forms.Form):
-    phone_number = forms.IntegerField(widget=forms.NumberInput(attrs={'class':'form-control'}))
+    phone_number = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))

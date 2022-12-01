@@ -1,0 +1,18 @@
+#box-buy{
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    margin: 2vw;
+    border: 1px solid gray;
+    border-radius: 2%;
+    /* height: 50vh; */
+    justify-content: space-between;
+}
+#box-buy span{
+    font-size: 1.5vw;
+    font-weight: 100;
+    text-align: center;
+}
+/* .inventory{
+    color: ;
+} */

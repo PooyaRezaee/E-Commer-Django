@@ -129,7 +129,8 @@ class LoginUserView(View):
             password = data['password']
 
             user = authenticate(request, phone_number=phone_number, password=password)
-            
+            print(phone_number)
+            print(password)
             if user is not None:
                 login(request,user)
                 messages.success(request,'You Logged','success')

@@ -11,7 +11,7 @@ class HomeView(ListView):
     template_name = 'home/index.html'
     context_object_name = 'products'
     ordering = ('created',)
-    # paginate_by = 1
+    paginate_by = 24
     
     def get_queryset(self):
         category_slug = self.kwargs.get('category_slug')
@@ -21,13 +21,6 @@ class HomeView(ListView):
             return products.filter(category=category)
         else:
             return products
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-
-    #     context['categories'] = Category.objects.all()
-
-    #     return context
 
 class ProductDetailView(DetailView):
     template_name = 'home/detail.html'

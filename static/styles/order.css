@@ -1,0 +1,25 @@
+.btn-show{
+    cursor: default !important;
+}
+
+td{
+    vertical-align: middle;
+}
+
+.text-bold{
+    font-size: 1.5vw;
+    font-style: bold;
+}
+
+.text-medium{
+    font-size: 1vw;
+    font-style: medium;
+}
+
+#empty{
+    text-align: center;
+    font-size: 2vw;
+}
+#empty i{
+    font-size: 20vw;
+}

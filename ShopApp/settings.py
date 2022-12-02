@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Local
     'apps.account.apps.AccountConfig',
     'apps.home.apps.HomeConfig',
+    'apps.order.apps.OrderConfig',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'apps.home.contexts.categories',
+                'apps.home.contexts.order_fill',
             ],
         },
     },

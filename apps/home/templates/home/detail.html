@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'styles/detail.css' %}">
 {% endblock head-custom %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}{{product.name}}{% endblock title %}
 
 {% block body %}
     <div class="col-12 d-flex p-2">
@@ -32,11 +32,23 @@
                 <hr>
                 <span><i class="fa-solid fa-dollar-sign text-success"></i> {{ product.price | intcomma }}</span>
                 <hr>
+
                 <div class="btn-group">
-                    <button class="btn btn-danger"><i class="fa-solid fa-minus"></i></button>
-                    <button class="btn btn-secondary" style="cursor: default;">0</button>
-                    <button class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
+                {% if count_item %}
+                    <a href="{% url 'order:subtract' product.id %}?next=detail&slug={{product.slug}}" class="btn btn-danger">
+                        {% if count_item == 1 %}
+                            <i class="fa-solid fa-trash"></i>
+                        {% else %}
+                            <i class="fa-solid fa-minus"></i>
+                        {% endif %}
+                    </a>
+                    <button class="btn btn-secondary" style="cursor: default;">{{ count_item }}</button>
+                    <a href="{% url 'order:add' product.id %}?next=detail&slug={{product.slug}}" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
+                {% else %}
+                    <a href="{% url 'order:add' product.id %}?next=detail&slug={{product.slug}}" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
+                {% endif %}
                 </div>
+
             </div>
         </div>
     </div>

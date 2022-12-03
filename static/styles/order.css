@@ -23,3 +23,7 @@ td{
 #empty i{
     font-size: 20vw;
 }
+.num-bold{
+    font-size: 1.2vw;
+    font-weight: 500;
+}

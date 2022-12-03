@@ -4,4 +4,7 @@ def categories(request):
     return {'categories': Category.objects.all() }
 
 def order_fill(request):
-    return {'order_fill': Cart(request.user.id).order_exist}
+    if request.user.is_authenticated:
+        return {'order_fill': Cart(request.user.id).order_exist}
+    else:
+        return{'order_fill': False}

@@ -1,4 +1,6 @@
 {% load static %}
+{% load base_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,8 +19,8 @@
 <body>
     <h1 class="bg-black display-1 text-light text-center p-5 m-0">Shop App</h1>
 
-    {% include 'inc/navbar.html' %}
-    {% include 'inc/message.html' %}
+    {% navbar %}
+    {% messages %}
 
     <div class="bg-light p-3">
         {% block body %}{% endblock body %}

@@ -11,7 +11,7 @@
                         <p class="text-center" style='font-size:2vw;font-weight: 500;'> {{ order.id }}</p>  
                         <p>Status Order : {% if order.payment.status == 'a' %} Awaiting Payment {% elif order.payment.status == 'p' %} paid {% endif %}</p>
                         <p>Created At <strong>{{ order.craeted | naturaltime }}</strong></p>
-                        <p>Total Price : {{ order.total }}</p>
+                        <p>Total Price : <i class="fa-solid fa-dollar-sign"></i> {{ order.total | intcomma }}</p>
                     </div>
 
                     <a href="{% url 'user:order' order.id %}" class="btn btn-secondary">Detail</a>

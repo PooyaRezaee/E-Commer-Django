@@ -29,14 +29,14 @@
                 {{ item.product.name }}
             </td>
             <td>{{ item.count }}</td>
-            <td>{{ item.product.price }}</td>
+            <td class="text-success"><i class="fa-solid fa-dollar-sign"></i> {{ item.product.price | intcomma }}</td>
         </tr>
     {% endfor %}
     <tr class="table-primary">
         <td colspan='2'>
             Total
         </td>
-        <td>{{ order.total }}</td>
+        <td class="text-success"><i class="fa-solid fa-dollar-sign"></i> {{ order.total | intcomma }}</td>
     </tr>
     </tbody>
 </table>

@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from .models import Address
 from django.contrib import messages
+from apps.order.models import OrderDetail,OrderItem
 
 __all__ = [
     'ProfileView',
@@ -58,7 +59,21 @@ class CreateAddresView(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
 class OredersView(LoginRequiredMixin,ListView):
-    pass
+    template_name = 'user/orders.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        orders = OrderDetail.objects.filter(user=self.request.user)
+
+        return orders
 
 class OrederDetailView(LoginRequiredMixin,DetailView):
-    pass
+    template_name = 'user/order_detail.html'
+    model = OrderDetail
+    context_object_name = 'order'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['items'] = OrderItem.objects.filter(order=context['order'])
+
+        return context

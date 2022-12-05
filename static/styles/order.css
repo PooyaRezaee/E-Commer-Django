@@ -2,10 +2,6 @@
     cursor: default !important;
 }
 
-td{
-    vertical-align: middle;
-}
-
 .text-bold{
     font-size: 1.5vw;
     font-style: bold;

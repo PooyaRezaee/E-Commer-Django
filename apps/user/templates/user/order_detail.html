@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}Order {{ order.id }}{% endblock title %}
+
+{% block body %}
+
+
+<div>
+    Your Order Created At {{ order.craeted | naturaltime }} and You 
+    {% if order.payment.status == 'a' %}<strong class="text-danger">Don't Paid</strong>
+    {% elif order.payment.status == 'p' %}<strong class="text-success">Paid</strong>{% endif %}It.
+        
+</div>
+<hr>
+<table class="table table-striped">
+    <thead>
+      <tr class="table-info">
+        <th scope="col">Product</th>
+        <th scope="col">Count</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    {% for item in items %}
+        <tr>
+            <td>
+                <img src={{item.product.image.url}} class='img-thumbnail rounded' width='5%'> 
+                {{ item.product.name }}
+            </td>
+            <td>{{ item.count }}</td>
+            <td>{{ item.product.price }}</td>
+        </tr>
+    {% endfor %}
+    <tr class="table-primary">
+        <td colspan='2'>
+            Total
+        </td>
+        <td>{{ order.total }}</td>
+    </tr>
+    </tbody>
+</table>
+{% endblock body %}

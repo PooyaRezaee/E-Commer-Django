@@ -9,6 +9,7 @@
 {% block title %}CheckOut Products{% endblock title %}
 
 {% block body %}
+<span id='token'>{% csrf_token %}</span>
 {% if orders %}
 <table class="table border border-2">
     <thead class='table-dark'>
@@ -20,47 +21,49 @@
     </thead>
     <tbody>
     {% for ord in orders %}
-        <tr>
-            <td scope="row" class="text-medium">
+        <tr id="t-{{ord.product.id}}">
+            <td colspan='1' scope="row" class="text-medium">
               <img src={{ord.product.image.url}} class='img-thumbnail rounded' width='8%'> 
               {{ ord.product.name }}
             </td>
-            <td> 
+            <td colspan='1'> 
               <div class="btn-group border border-2 rounded">
-                  
-                    <a href="{% url 'order:subtract' ord.product.id %}?next=checkout" class="btn text-danger">
+                    <button onclick="SubtractItem({{ ord.product.id }})" id="subtract-{{ ord.product.id }}" class="btn text-danger">
                       {% if ord.count > 1 %}
                         <i class="fa-solid fa-minus"></i>
                       {% else %}
                         <i class="fa-solid fa-trash"></i>
                       {% endif %}
-                    </a>
+                    </button>
                   <button class="btn btn-show">
-                    {% for num in ord.count|make_list  %}<i class="text-danger fa-solid fa-{{ num }}"></i>{% endfor %}
+                    <span id="p-c-{{ord.product.id}}" class='text-danger num-bold'>{{ord.count}}</span>
                   </button>
-                  <a href="{% url 'order:add' ord.product.id %}?next=checkout" class="btn text-danger"><i class="fa-solid fa-plus"></i></a>
+                  <button id="add-{{ ord.product.id }}" onclick="AddItem({{ ord.product.id }})" class="btn text-danger"><i class="fa-solid fa-plus"></i></button>
               </div>
             </td>
-            <td>
-              <span class="text-secondary text-medium"><i class="fa-solid fa-dollar-sign"></i> {{ ord.product.price | intcomma }}</span>
+            <td colspan='1' class="text-secondary text-medium">
+              <i class="fa-solid fa-dollar-sign"></i> <span id="p-p-{{ord.product.id}}">{{ ord.product.price | intcomma }}</span>
             </td>
         </tr>
     {% endfor %}
         <tr class="table-primary">
           <td colspan='2' class="p-2 text-bold">Total</td>
-          <td colspan='1' class="p-2 text-bold">
-            <span class="text-success"><i class="fa-solid fa-dollar-sign"></i> {{ order_detail.total | intcomma }}</span>
+          <td colspan='1' class="p-2 text-bold text-success">
+            <i class="fa-solid fa-dollar-sign"></i> <span id="total-price">{{ order_detail.total | intcomma }}</span>
           </td>
         </tr>
       </tbody>
     </table>
     <hr>
-    <a href="#" class="btn btn-success col-12">Payment</a>
+    <a href="#" id="p-btn" class="btn btn-success col-12">Payment</a>
 </div>
 {% else %}
 <div id="empty">
   <i class="text-danger fa-solid fa-xmark"></i>
   <div>Order Is Empty</div>
 </div>
+
 {% endif %}
+<script src="{% static 'script/order/edit_order.js' %}"></script>
+<script src="{% static 'script/order/in_checkout.js' %}"></script>
 {% endblock body %}

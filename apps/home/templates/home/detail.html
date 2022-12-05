@@ -33,23 +33,26 @@
                 <span><i class="fa-solid fa-dollar-sign text-success"></i> {{ product.price | intcomma }}</span>
                 <hr>
 
-                <div class="btn-group">
+                <div class="btn-group" id='g-b'>
                 {% if count_item %}
-                    <a href="{% url 'order:subtract' product.id %}?next=detail&slug={{product.slug}}" class="btn btn-danger">
+                    <button onclick="SubtractItem({{ product.id }})" class="btn btn-danger" id="subtract-product">
                         {% if count_item == 1 %}
                             <i class="fa-solid fa-trash"></i>
                         {% else %}
                             <i class="fa-solid fa-minus"></i>
                         {% endif %}
-                    </a>
-                    <button class="btn btn-secondary" style="cursor: default;">{{ count_item }}</button>
-                    <a href="{% url 'order:add' product.id %}?next=detail&slug={{product.slug}}" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
+                    </button>
+                    <button class="btn btn-secondary" style="cursor: default;" id="p-c-{{ product.id }}">{{ count_item }}</button>
+                    <button onclick="AddItem({{ product.id }})"  class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
                 {% else %}
-                    <a href="{% url 'order:add' product.id %}?next=detail&slug={{product.slug}}" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
+                    <button onclick="AddItem({{ product.id }})"  class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
                 {% endif %}
                 </div>
 
             </div>
         </div>
     </div>
+
+<script src="{% static 'script/order/edit_order.js' %}"></script>
+<script src="{% static 'script/order/in_detail.js' %}"></script>
 {% endblock body %}

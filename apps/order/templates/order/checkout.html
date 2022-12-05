@@ -38,7 +38,7 @@
                   <button class="btn btn-show">
                     <span id="p-c-{{ord.product.id}}" class='text-danger num-bold'>{{ord.count}}</span>
                   </button>
-                  <button onclick="AddItem({{ ord.product.id }})" class="btn text-danger"><i class="fa-solid fa-plus"></i></button>
+                  <button id="add-{{ ord.product.id }}" onclick="AddItem({{ ord.product.id }})" class="btn text-danger"><i class="fa-solid fa-plus"></i></button>
               </div>
             </td>
             <td colspan='1' class="text-secondary text-medium">

@@ -1,11 +1,19 @@
 function AddItem(product_id) {
-    SendRequest("add", product_id);
-    ChangeCount(product_id, +1);
+    SendRequest("add", product_id)
+    .then((data) => {
+        if (data['status'] == 'ok'){
+            ChangeCount(product_id, +1);
+        }
+    });
 }
 
 function SubtractItem(product_id) {
-    SendRequest("subtract", product_id);
-    ChangeCount(product_id, -1);
+    SendRequest("subtract", product_id)
+    .then((data) => {
+        if (data['status'] == 'ok'){
+            ChangeCount(product_id, -1);
+        }
+    });
 }
 
 function ChangeCount(product_id, num) {

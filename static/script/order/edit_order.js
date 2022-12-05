@@ -17,7 +17,7 @@ function getCookie(name) {
 }
 
 function SendRequest(type, product_id) {
-    fetch("/order/checkout/edit/", {
+    return fetch("/order/checkout/edit/", {
         method: "POST",
         credentials: "same-origin",
         headers: {
@@ -30,6 +30,5 @@ function SendRequest(type, product_id) {
     })
         .then((response) => {
             return response.json();
-        })
-        .then((data) => {});
-}
+        });
+    }

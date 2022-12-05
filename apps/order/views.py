@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.views import View
-from django.contrib import messages
+from apps.home.models import Product
 from .models import *
 from .utils import Cart
 import json
@@ -29,12 +29,20 @@ class EditItemView(View):
 
         cart = Cart(request.user.id)
         if type == "add":
+            count_product = Product.objects.get(id=product_id).amount
+            if count_product == cart.count_item(product_id):
+                return JsonResponse(
+                            {
+                                'status':'error',
+                                'code':'404'
+                            }
+                            )
             cart.add_item(product_id)
         elif type == "subtract":
             try:
                 cart.subtract_item(product_id)
             except:
-                return JsonResponse({'status':'n','message':'Item Not Exist'})
+                return JsonResponse({'status':'error','code':'404'})
 
         
         return JsonResponse(

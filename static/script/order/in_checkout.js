@@ -1,11 +1,24 @@
 function AddItem(product_id) {
-    SendRequest("add", product_id);
-    ChangeCount(product_id, +1);
+    SendRequest("add", product_id)
+    .then((data) => {
+        switch (data['status']) {
+            case 'ok':
+                ChangeCount(product_id, +1);
+                break;
+            default:
+                // TODO disable button
+                break;
+        }
+    });
 }
 
 function SubtractItem(product_id) {
-    SendRequest("subtract", product_id);
-    ChangeCount(product_id, -1);
+    SendRequest("subtract", product_id)
+    .then((data) => {
+        if (data['status'] == 'ok'){
+            ChangeCount(product_id, -1);
+        }
+    });
 }
 
 function ChangeCount(product_id, num) {
@@ -53,9 +66,7 @@ function ChangePrice(diff) {
 }
 
 function DisplayPaymentBtn() {
-    console.log('entered')
     let total_price = document.getElementById("total-price").innerHTML;
-    console.log(total_price)
     if (parseInt(total_price) == 0) {
         document.getElementById("p-btn").style.display = "none";
     }

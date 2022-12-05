@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Addresses{% endblock title %}
+
+{% block body %}
+    {% if addresses %}
+        <div class="d-flex flex-wrap">
+            {% for address in addresses %}
+                <div class="card  col-6 p-2 bg-light border-0">
+                    <div class="card-body bg-secondary text-light">
+                        <p><i class="fa-solid fa-road"></i> {{ address.full_address }}</p>
+                        <hr>
+                        <div>
+                            <span class="me-5"><i class="fa-solid fa-location-dot"></i> {{ address.city }}</span>
+                            <span><i class="fa-solid fa-signs-post"></i> {{ address.zip_code }}</span>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'user:delete-address' address.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <div class="text-center">
+        <i class="text-danger fa-solid fa-xmark" style="font-size: 15vw;"></i>
+        <p class="display-5">Don't Have Address</p>
+    </div>
+    {% endif %}
+
+    <hr>
+    <a href="{% url 'user:create-address' %}" class="btn btn-success col-12">Add New Address</a>
+        
+{% endblock body %}

@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('apps.home.urls', namespace='home')),
     path('account/', include('apps.account.urls', namespace='account')),
     path('order/', include('apps.order.urls', namespace='order')),
+    path('user/', include('apps.user.urls', namespace='user')),
 
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

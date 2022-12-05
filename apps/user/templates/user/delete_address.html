@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Addresses{% endblock title %}
+
+{% block body %}
+    <form method="POST">
+        {% csrf_token %}
+        Are You Sure?<a href="{% url 'user:addresses' %}" class="btn btn-secondary">No</a><input type="submit" class="btn btn-danger" value="Yes">
+        
+    </form>
+{% endblock body %}

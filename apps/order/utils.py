@@ -6,7 +6,7 @@ class OrderManage:
             
 
     def _create_db(self):
-        self.order = OrderDetail.objects.create(user=self.user)
+        self.order = OrderDetail.objects.create(user=self.user,address=self.user.defualt_address)
         self.payment = PaymentDetail.objects.create(order=self.order)
     
     def _add_items(self,items):

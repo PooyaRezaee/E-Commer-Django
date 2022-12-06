@@ -20,6 +20,7 @@ class OrderItem(models.Model):
 
 class OrderDetail(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='order')
+    address = models.ForeignKey('user.address',on_delete=models.DO_NOTHING)
     craeted = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

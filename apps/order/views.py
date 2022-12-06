@@ -23,6 +23,9 @@ class PayView(LoginRequiredMixin,View):
             case 'paytest':
                 order = OrderManage(request.user)
                 cart = CartSession.objects.get(user=request.user)
+                if not request.user.defualt_address:
+                    messages.warning(request,'Please Set Address Defualt',extra_tags='warning')
+                    return redirect('user:profile')
                 order_ = order.CreateOreder(cart.items)
                 messages.success(request,'The order is pending payment',extra_tags='warning')
                 order.OrderPaid(order_)

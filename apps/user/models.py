@@ -9,7 +9,10 @@ class Address(models.Model):
     unit = models.PositiveBigIntegerField()
     zip_code = models.PositiveBigIntegerField()
 
+    def __str__(self):
+        return self.short_address + '-' + str(self.zip_code)
+
     @property
     def full_address(self):
-        address = self.city + ',' + self.short_address + ',No ' + str(self.no) + ',Unit ' + str(self.unit)
+        address = self.city + ',' + self.short_address + ',N.o ' + str(self.no) + ',Unit ' + str(self.unit)
         return address

@@ -12,10 +12,13 @@
                         <hr>
                         <div>
                             <span class="me-5"><i class="fa-solid fa-location-dot"></i> {{ address.city }}</span>
-                            <span><i class="fa-solid fa-signs-post"></i> {{ address.zip_code }}</span>
+                            <span class="me-5"><i class="fa-solid fa-signs-post"></i> {{ address.zip_code }}</span>
+                            {% if request.user.defualt_address == address %}
+                                <span class="badge badge-pill badge-primary bg-primary">Defualt</span>
+                            {% endif %}
                         </div>
                     </div>
-
+                    
                     <a href="{% url 'user:delete-address' address.id %}" class="btn btn-danger">Delete</a>
                 </div>
             {% endfor %}

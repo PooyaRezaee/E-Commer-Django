@@ -61,6 +61,7 @@ class User(AbstractBaseUser):
     full_name = models.CharField(max_length=64)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    defualt_address = models.ForeignKey('user.Address',on_delete=models.CASCADE,null=True,blank=True)
 
     objects = UserManager()
 

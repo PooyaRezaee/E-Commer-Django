@@ -24,7 +24,7 @@ class CartSession(models.Model):
     def __str__(self):
         return str(self.user)
 
-
+    @property
     def total_price(self):
         prices = 0
         order_items = ItemSession.objects.filter(cart=self)
@@ -33,6 +33,7 @@ class CartSession(models.Model):
 
         return prices
 
+    @property
     def items(self):
         items = ItemSession.objects.filter(cart=self).order_by('craeted',)
         return items

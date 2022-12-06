@@ -7,8 +7,8 @@
 
 <div>
     Your Order Created At {{ order.craeted | naturaltime }} and You 
-    {% if order.payment.status == 'a' %}<strong class="text-danger">Don't Paid</strong>
-    {% elif order.payment.status == 'p' %}<strong class="text-success">Paid</strong>{% endif %}It.
+    {% if order.payment_stat == 'a' %}<strong class="text-danger">Don't Paid</strong>
+    {% elif order.payment_stat == 'p' %}<strong class="text-success">Paid</strong>{% endif %} It.
         
 </div>
 <hr>

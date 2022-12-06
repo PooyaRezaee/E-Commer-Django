@@ -19,7 +19,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('full_name','phone_number','email')
+        fields = ('full_name','phone_number','email','defualt_address')
 
 class UserCreateAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

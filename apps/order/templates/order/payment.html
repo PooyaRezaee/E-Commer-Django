@@ -4,6 +4,40 @@
 
 {% block title %}Payment Product{% endblock title %}
 
+{% block head-custom %}<link rel="stylesheet" href="{% static 'styles/payment.css' %}">{% endblock head-custom %}
+
 {% block body %}
-Payment Page
+<div class="text-center">
+    
+    <div class="col-8 ms-auto me-auto d-flex flex-column address">
+        {% with request.user.defualt_address as def_addr %}
+        <span class="bg-success text-light p-2">Your Address</span>
+        <div class="bg-white">
+            <blockquote class="blockquote text-center m-2 address-content">
+                <p class="mb-3">{{ def_addr.full_address }}</p>
+                <footer class="blockquote-footer">{{ def_addr.zip_code }}</cite></footer>
+            </blockquote>
+        </div>
+        <a href="{% url 'user:profile' %}" class="col-12 btn btn-primary">Change Defualt Address</a>
+        {% endwith %}
+    </div>
+    
+    <hr>
+    <span class="bg-warning p-2">You Must Pay <i class="fa-solid fa-dollar-sign"></i> {{ total_price | intcomma }}</span>
+    <div class="col-8 ms-auto me-auto d-flex flex-column address">
+        <span class="bg-success text-light p-2">Select Ways Pay</span>
+        <div>
+            <div id="paytest" class="bg-white p-3 way-pay">
+                PayTest
+            </div>
+            {% comment %} <hr class="m-0">
+            <div id="paypal" class="bg-white p-3 way-pay">
+                PayPal
+            </div> {% endcomment %}
+        </div>
+        <button id="btn-pay" class="col-12 btn btn-primary" disabled>Pay</button>
+    </div>
+</div>
+
+<script src="{% static 'script/pay/script.js' %}"></script>
 {% endblock body %}

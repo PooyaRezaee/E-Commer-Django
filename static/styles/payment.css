@@ -1,0 +1,11 @@
+.address{
+    font-size: 1vw;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-radius: 10px;
+}
+
+.address-content{
+    font-size: 1.5vw;
+    font-weight: 600;
+}

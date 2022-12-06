@@ -20,7 +20,6 @@ class OrderItem(models.Model):
 
 class OrderDetail(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='order')
-    payment = models.ForeignKey('PaymentDetail',on_delete=models.CASCADE,related_name='order')
     craeted = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -38,6 +37,9 @@ class OrderDetail(models.Model):
     def items(self):
         items = OrderItem.objects.filter(order=self).order_by('craeted',)
         return items
+    
+    def payment_stat(self):
+        return PaymentDetail.objects.get(order=self).status
 
 class PaymentDetail(models.Model):
     STATUS_CHOICES =(
@@ -46,6 +48,7 @@ class PaymentDetail(models.Model):
     )
 
     status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='a')
+    order = models.ForeignKey(OrderDetail,on_delete=models.CASCADE,related_name='payment')
     craeted = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

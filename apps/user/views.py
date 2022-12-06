@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
 from .models import Address
 from django.contrib import messages
-from apps.order.models import OrderDetail,OrderItem
+from apps.order.models import OrderDetail,PaymentDetail
 
 __all__ = [
     'ProfileView',
@@ -26,6 +26,10 @@ class ProfileView(LoginRequiredMixin,UpdateView):
 
     def get_object(self):
         return User.objects.get(id=self.request.user.id)
+    
+    def form_valid(self, form):
+        messages.success(self.request, "Profile Updated",extra_tags='success')
+        return super().form_valid(form)
 
 class AddressesView(LoginRequiredMixin,ListView):
     template_name = 'user/addresses.html'
@@ -66,6 +70,8 @@ class OredersView(LoginRequiredMixin,ListView):
         orders = OrderDetail.objects.filter(user=self.request.user)
 
         return orders
+    
+
 
 class OrederDetailView(LoginRequiredMixin,DetailView):
     template_name = 'user/order_detail.html'

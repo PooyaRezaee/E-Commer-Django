@@ -7,9 +7,9 @@
         <div class="d-flex flex-wrap">
             {% for order in orders %}
                 <div class="card  col-6 p-2 bg-light border-0" style='font-size:1vw'>
-                    <div class="card-body {% if order.payment.status == 'a' %} bg-primary text-light {% elif order.payment.status == 'p' %} bg-warning text-dark {% endif %}">
+                    <div class="card-body {% if order.payment_stat == 'a' %} bg-primary text-light {% elif order.payment_stat == 'p' %} bg-warning text-dark {% endif %}">
                         <p class="text-center" style='font-size:2vw;font-weight: 500;'> {{ order.id }}</p>  
-                        <p>Status Order : {% if order.payment.status == 'a' %} Awaiting Payment {% elif order.payment.status == 'p' %} paid {% endif %}</p>
+                        <p>Status Order : {% if order.payment_stat == 'a' %} Awaiting Payment {% elif order.payment_stat == 'p' %} paid {% endif %}</p>
                         <p>Created At <strong>{{ order.craeted | naturaltime }}</strong></p>
                         <p>Total Price : <i class="fa-solid fa-dollar-sign"></i> {{ order.total | intcomma }}</p>
                     </div>

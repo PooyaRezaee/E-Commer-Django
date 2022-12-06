@@ -45,7 +45,11 @@
                     <button class="btn btn-secondary" style="cursor: default;" id="p-c-{{ product.id }}">{{ count_item }}</button>
                     <button onclick="AddItem({{ product.id }})"  class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
                 {% else %}
-                    <button onclick="AddItem({{ product.id }})"  class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
+                    {% if request.user.is_authenticated %}
+                        <button onclick="AddItem({{ product.id }})"  class="btn btn-success"><i class="fa-solid fa-plus"></i></button>
+                    {% else %}
+                        <a href="{% url 'account:login' %}"  class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
+                    {% endif %}
                 {% endif %}
                 </div>
 

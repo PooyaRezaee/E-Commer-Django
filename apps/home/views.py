@@ -32,8 +32,9 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        count_item = Cart(self.request.user.id).count_item(context['object'].id)
-        if count_item:
-            context['count_item'] = count_item
+        if self.request.user.is_authenticated:
+            count_item = Cart(self.request.user.id).count_item(context['object'].id)
+            if count_item:
+                context['count_item'] = count_item
 
         return context

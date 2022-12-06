@@ -13,7 +13,7 @@ __all__ = [
 
 class PaymentView(LoginRequiredMixin,View):
     def get(self,request):
-        total_price = CartSession.objects.get(id=request.user.id).total_price
+        total_price = CartSession.objects.get(user=request.user.id).total_price
         return render(request,'order/payment.html',{'total_price':total_price})
 
 class PayView(LoginRequiredMixin,View):

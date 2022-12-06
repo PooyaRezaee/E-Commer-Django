@@ -9,8 +9,7 @@
 {% block title %}CheckOut Products{% endblock title %}
 
 {% block body %}
-<span id='token'>{% csrf_token %}</span>
-{% if orders %}
+{% if items %}
 <table class="table border border-2">
     <thead class='table-dark'>
       <tr>
@@ -20,42 +19,42 @@
       </tr>
     </thead>
     <tbody>
-    {% for ord in orders %}
-        <tr id="t-{{ord.product.id}}">
+    {% for item in items %}
+        <tr id="t-{{item.product.id}}">
             <td colspan='1' scope="row" class="text-medium">
-              <img src={{ord.product.image.url}} class='img-thumbnail rounded' width='8%'> 
-              {{ ord.product.name }}
+              <img src={{item.product.image.url}} class='img-thumbnail rounded' width='8%'> 
+              {{ item.product.name }}
             </td>
             <td colspan='1'> 
               <div class="btn-group border border-2 rounded">
-                    <button onclick="SubtractItem({{ ord.product.id }})" id="subtract-{{ ord.product.id }}" class="btn text-danger">
-                      {% if ord.count > 1 %}
+                    <button onclick="SubtractItem({{ item.product.id }})" id="subtract-{{ item.product.id }}" class="btn text-danger">
+                      {% if item.count > 1 %}
                         <i class="fa-solid fa-minus"></i>
                       {% else %}
                         <i class="fa-solid fa-trash"></i>
                       {% endif %}
                     </button>
                   <button class="btn btn-show">
-                    <span id="p-c-{{ord.product.id}}" class='text-danger num-bold'>{{ord.count}}</span>
+                    <span id="p-c-{{item.product.id}}" class='text-danger num-bold'>{{item.count}}</span>
                   </button>
-                  <button id="add-{{ ord.product.id }}" onclick="AddItem({{ ord.product.id }})" class="btn text-danger"><i class="fa-solid fa-plus"></i></button>
+                  <button id="add-{{ item.product.id }}" onclick="AddItem({{ item.product.id }})" class="btn text-danger"><i class="fa-solid fa-plus"></i></button>
               </div>
             </td>
             <td colspan='1' class="text-secondary text-medium">
-              <i class="fa-solid fa-dollar-sign"></i> <span id="p-p-{{ord.product.id}}">{{ ord.product.price | intcomma }}</span>
+              <i class="fa-solid fa-dollar-sign"></i> <span id="p-p-{{item.product.id}}">{{ item.product.price | intcomma }}</span>
             </td>
         </tr>
     {% endfor %}
         <tr class="table-primary">
           <td colspan='2' class="p-2 text-bold">Total</td>
           <td colspan='1' class="p-2 text-bold text-success">
-            <i class="fa-solid fa-dollar-sign"></i> <span id="total-price">{{ order_detail.total | intcomma }}</span>
+            <i class="fa-solid fa-dollar-sign"></i> <span id="total-price">{{ cart_detail.total_price | intcomma }}</span>
           </td>
         </tr>
       </tbody>
     </table>
     <hr>
-    <a href="#" id="p-btn" class="btn btn-success col-12">Payment</a>
+    <a href="{% url 'order:payment' %}" id="p-btn" class="btn btn-success col-12">Payment</a>
 </div>
 {% else %}
 <div id="empty">
@@ -64,6 +63,6 @@
 </div>
 
 {% endif %}
-<script src="{% static 'script/order/edit_order.js' %}"></script>
-<script src="{% static 'script/order/in_checkout.js' %}"></script>
+<script src="{% static 'script/cart/edit_order.js' %}"></script>
+<script src="{% static 'script/cart/in_checkout.js' %}"></script>
 {% endblock body %}

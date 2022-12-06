@@ -16,7 +16,7 @@ class OrderItem(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.product)
+        return str(self.order) + '-' + str(self.product)
 
 class OrderDetail(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='order')
@@ -25,7 +25,7 @@ class OrderDetail(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.id) +  '-' + str(self.user)
 
     def total(self):
         prices = 0
@@ -50,4 +50,4 @@ class PaymentDetail(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.order)
+        return str(self.id) + '-' + str(self.order)

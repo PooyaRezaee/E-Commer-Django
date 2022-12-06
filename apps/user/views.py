@@ -74,6 +74,6 @@ class OrederDetailView(LoginRequiredMixin,DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['items'] = OrderItem.objects.filter(order=context['order'])
+        context['items'] = context['order'].items
 
         return context

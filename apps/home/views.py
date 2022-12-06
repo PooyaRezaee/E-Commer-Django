@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from django.views import View
 from .models import *
-from apps.order.utils import Cart
+from apps.cart.utils import Cart
 
 __all__ = [
     'HomeView',

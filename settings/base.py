@@ -43,7 +43,7 @@ MIDDLEWARE = [
 ]
 
 # URLS
-ROOT_URLCONF = 'ShopApp.urls'
+ROOT_URLCONF = 'core.urls'
 
 # TEMPLATES
 TEMPLATES = [
@@ -64,7 +64,7 @@ TEMPLATES = [
 ]
 
 # WSGI
-WSGI_APPLICATION = 'ShopApp.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 # DATABASE
 DATABASES = {

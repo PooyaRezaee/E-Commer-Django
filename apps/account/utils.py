@@ -3,7 +3,7 @@ from django.conf import settings
 
 def send_otp_code(email,name,code):
     send_mail(
-        subject='Verify Code For ShopApp',
+        subject='Verify Code For core',
         message=f'Hello Dear {name},Tihs is Your Code {code}',
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=[email])

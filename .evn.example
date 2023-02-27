@@ -9,3 +9,5 @@ POSTGRESS_PORT = port db
 
 EMAIL_HOST_USER = gmail addres
 EMAIL_HOST_PASSWORD = gmail password app
+
+SETTINGS_TYPE = development or production

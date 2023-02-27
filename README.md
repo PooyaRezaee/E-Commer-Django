@@ -1,4 +1,4 @@
 # E-Commer-Djnago
-Simple ShopApp With Django
+Simple E-Commer Site With Django
 
 This project is under development ...

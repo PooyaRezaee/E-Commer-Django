@@ -22,6 +22,7 @@ INSTALLED_APPS = [
 
     #3rd party
     'django.contrib.humanize',
+    'django_celery_beat',
 
     # Local
     'apps.account.apps.AccountConfig',

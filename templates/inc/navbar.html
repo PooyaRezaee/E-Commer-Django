@@ -49,6 +49,10 @@
                                 <li><a class="dropdown-item" href="{% url 'user:orders' %}">Orders</a></li>
                                 <hr>
                                 <li><a class="dropdown-item" href="{% url 'account:logout' %}">Logout</a></li>
+                                {% if request.user.is_admin %}
+                                <hr>
+                                <li><a class="dropdown-item bg-danger text-light" href="{% url 'account:otp-del' %}">Delete OtpCode</a></li>
+                                {% endif %}
                             </ul>
                         </li>
                     </div>

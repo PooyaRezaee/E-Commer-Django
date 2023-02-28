@@ -8,4 +8,5 @@ urlpatterns = [
     path("register/verify/", VerifyCode.as_view(), name="verify_code"),
     path("login/", LoginUserView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
+    path("otp_delete/",delete_otp_codes.as_view(),name="otp-del")
 ]

@@ -88,6 +88,7 @@ class User(AbstractBaseUser):
 class OtpCode(models.Model):
     phone = models.CharField(max_length=11,unique=True)
     code = models.PositiveSmallIntegerField()
+    # created = models.DateTimeField(auto_now_add=True) # TODO set in database
 
 
     def check_code(self,code):
@@ -95,6 +96,8 @@ class OtpCode(models.Model):
             return True
         else:
             return False
+
+    # TODO method check code i passed or no
 
     def __str__(self):
         return str(self.phone)

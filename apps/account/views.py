@@ -7,12 +7,14 @@ from .utils import send_otp_code,send_custom_email
 import random
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .mixins import SuperUserOnlyMixin
 
 __all__ = [
     'RegistretionUser',
     'VerifyCode',
     'LoginUserView',
-    'LogoutView'
+    'LogoutView',
+    'delete_otp_codes'
 ]
 
 
@@ -141,4 +143,17 @@ class LogoutView(LoginRequiredMixin,View):
     def get(self, request):
         logout(request)
         messages.info(request, 'You Logouted',extra_tags='info')
+        return redirect('home:index')
+
+class delete_otp_codes(SuperUserOnlyMixin,View):
+    """
+        JUST FOR TEST CELERY TAsk
+    """
+
+    def get(self,request):
+        from .tasks import auto_delete_otp
+
+        auto_delete_otp.delay()
+
+        messages.info(request, 'All OtpCodes Deleted', extra_tags='info')
         return redirect('home:index')

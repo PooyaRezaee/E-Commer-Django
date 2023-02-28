@@ -119,3 +119,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 # OTHER
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.User'
+
+# Celery settings
+CELERY_BROKER_URL = "amqp://"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"

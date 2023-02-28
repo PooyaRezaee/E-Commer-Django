@@ -6,5 +6,5 @@ from datetime import timedelta
 def auto_delete_otp():
     otp_codes = OtpCode.objects.all()
     for code in otp_codes:
-        # TODO check if 2 minutues after
-        code.delete()
+        if code.is_expired():
+            code.delete()

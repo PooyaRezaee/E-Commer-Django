@@ -155,5 +155,5 @@ class delete_otp_codes(SuperUserOnlyMixin,View):
 
         auto_delete_otp.delay()
 
-        messages.info(request, 'All OtpCodes Deleted', extra_tags='info')
+        messages.info(request, 'All OtpCodes Deleting ...', extra_tags='info')
         return redirect('home:index')

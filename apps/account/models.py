@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 from .utils import send_custom_email
+from django.utils import timezone
 
 __all__ = ['User','OtpCode']
 
@@ -88,7 +89,7 @@ class User(AbstractBaseUser):
 class OtpCode(models.Model):
     phone = models.CharField(max_length=11,unique=True)
     code = models.PositiveSmallIntegerField()
-    # created = models.DateTimeField(auto_now_add=True) # TODO set in database
+    created = models.DateTimeField(auto_now_add=True)
 
 
     def check_code(self,code):
@@ -97,7 +98,12 @@ class OtpCode(models.Model):
         else:
             return False
 
-    # TODO method check code i passed or no
+    def is_expired(self):
+        now = timezone.now()
+        delta = now - self.created
+        if timezone.timedelta(minutes=2) > delta:
+            return False
+        return True
 
     def __str__(self):
         return str(self.phone)
